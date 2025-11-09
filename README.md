@@ -1,17 +1,14 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/-cPJVYMd)
-Django ORM Standalone
+Django ORM Standalone With Interactive Cash Register Application
 =====================
 
 ![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
 ![Python](https://img.shields.io/badge/Python-yellow)
 
-Use the database components of Django without having to use the rest of Django (i.e. running a web server)! :tada: A typical use case for using this template would be if you are writing a python script and you would like the database functionality provided by Django, but have no need for the request/response functionalty of a client/server web application that Django also provides. 
-
-With this project template you can write regular python scripts and use Django's excellent ORM functionality with the database backend of your choice. This makes it convienient for Djangonauts to write database driven python applications with the familiar and well polished Django ORM. Enjoy.
+This project uses the database components of Django without using the rest of Django (i.e. running a web server)! :tada: Our project takes advantage of Django ORM Standalone to implement a simple, randomized cash register. It does not use the request/response functionalty of a client/server web application that Django also provides, which means it is made to run locally. 
 
 :gear: Requirements
 -------------------
-- Last tested successfully with Python 3.10.4 and Django 5.0.6
+- Last tested successfully with Python 3.11.9 and Django 5.2.8
 - Create venv and pip install django to import the required modules.
 
 :open_file_folder: File Structure
@@ -23,18 +20,21 @@ django-orm/
 │   └── models.py
 ├── main.py
 ├── manage.py
+├── products_file.txt
 ├── README.md
 └── settings.py
 ```
 
-__The main.py file is the entry point for the project, and where you start your code. You automatically get access to your models via ```from db.models import *```
+__The [main.py](main.py) file is the entry point for the project, and where you can run this repositiory from. You automatically get access to the item model via ```from db.models import *```
 Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
 
-__The db/models.py is where you configure your typical Django models.__ There is a toy user model included as a simple example. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM. 
+__The [models.py](db/models.py) is for configuring typical Django models.__ There is a item model used in creating the interactive, random cash register. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM.
+
+__The [products_file.txt](products_file.txt) is the data file for all of the items that will be available to be scanned.__ Its contents will be read and stored into the database upon running main.py.
 
 :rocket: Quick Setup
 --------------------
-Clone this repository into your local machine (Using Command Prompt). You can alternatively use your favorite IDE's Source Control features to clone this project.
+Clone this repository into your local machine (Using Command Prompt). You can alternatively use your favorite IDE's Source Control features to clone this repository
 ```
 git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-tutorial-groups-36-crn-45894.git grp-36-assignment-3
 
@@ -59,48 +59,15 @@ Run the project
 python main.py
 ```
 
-Feel free to send pull requests if you want to improve this project.
-
-:crystal_ball: Example
+:crystal_ball: Example Screen Dumps
 ----------------------
-After running Quick Start above: 
+Make sure your new environment is prepended by ```(venv)```:
+![Check for (venv) to see if in virtual environment](screendumps\venvcheck.png)
 
-Code in db/models.py:
-```
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default='Dan')
-
-    def __str__(self):
-        return self.name
-```
-Code in main.py:
-```
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
-
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
-```
-Output from command: ```python main.py```
-```
-ID: 1	Username: Dan
-ID: 2	Username: Robert
-```
+After going through Quick Setup:
+![Running main.py after succesful setup](screendumps\runningmainpy.png)
 
 :mortar_board: Django Models
 ----------------------------
 
 Link: [How to Use Django Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
-
-License
--------
-
-The MIT License (MIT) Copyright (c) 2024 Dan Caron
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
