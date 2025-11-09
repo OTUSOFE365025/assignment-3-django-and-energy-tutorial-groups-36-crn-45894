@@ -34,21 +34,23 @@ __The db/models.py is where you configure your typical Django models.__ There is
 
 :rocket: Quick Setup
 --------------------
-Create a folder for your project on your local machine
+Clone this repository into your local machine (Using Command Prompt)
 ```
-mkdir myproject; cd myproject
+git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-tutorial-groups-36-crn-45894.git grp-36-assignment-3
 ```
-Create a virtual environment and install django
+Create a virtual environment (Windows Machine with Powershell) and install django
 ```
-python -m venv venv; source venv/bin/activate; pip install django
-```
-Download this project template from GitHub
-```
-git clone git@github.com:dancaron/Django-ORM.git; cd Django-ORM
+python -m venv venv 
+
+venv\Scripts\Activate.ps1
+
+pip install django
 ```
 Initialize the database
 ```
-python manage.py makemigrations db; python manage.py migrate
+python manage.py makemigrations db
+
+python manage.py migrate
 ```
 Run the project
 ```
