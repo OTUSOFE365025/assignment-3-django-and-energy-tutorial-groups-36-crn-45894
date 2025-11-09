@@ -34,7 +34,7 @@ __The db/models.py is where you configure your typical Django models.__ There is
 
 :rocket: Quick Setup
 --------------------
-Clone this repository into your local machine (Using Command Prompt)
+Clone this repository into your local machine (Using Command Prompt). You can alternatively use your favorite IDE's Source Control features to clone this project.
 ```
 git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-tutorial-groups-36-crn-45894.git grp-36-assignment-3
 
