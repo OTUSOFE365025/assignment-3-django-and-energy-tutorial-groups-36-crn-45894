@@ -37,6 +37,8 @@ __The db/models.py is where you configure your typical Django models.__ There is
 Clone this repository into your local machine (Using Command Prompt)
 ```
 git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-tutorial-groups-36-crn-45894.git grp-36-assignment-3
+
+cd grp-36-assignment-3
 ```
 Create a virtual environment (Windows Machine with Powershell) and install django
 ```
