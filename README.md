@@ -62,10 +62,10 @@ python main.py
 :crystal_ball: Example Screen Dumps
 ----------------------
 Make sure your new environment is prepended by ```(venv)```:
-![Check for (venv) to see if in virtual environment](screendumps\venvcheck.png)
+![Check for (venv) to see if in virtual environment](screendumps/venvcheck.png)
 
 After going through Quick Setup:
-![Running main.py after succesful setup](screendumps\runningmainpy.png)
+![Running main.py after succesful setup](screendumps/runningmainpy.png)
 
 :mortar_board: Django Models
 ----------------------------
