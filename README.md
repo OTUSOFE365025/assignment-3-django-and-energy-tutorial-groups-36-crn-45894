@@ -73,7 +73,7 @@ Make sure your new environment is prepended by ```(venv)```:
 After going through Quick Setup:
 ![Running main.py after succesful setup](screendumps/runningmainpy.png)
 
-Scanning products via entering their UPC code and clicking the scan button
+Scanning products via entering their UPC code and clicking the Scan Item button
 ![Entering UPC codes](screendumps/productscanner.png)
 
 :mortar_board: Django Models
