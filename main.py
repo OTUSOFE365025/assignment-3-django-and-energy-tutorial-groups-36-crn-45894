@@ -24,24 +24,40 @@ from db.models import *
 ############################################################################
 
 # Simple Tkinter Cash Register GUI Application
-import random
 import tkinter as tk
 from tkinter.scrolledtext import ScrolledText
+
 RUNNING_SUBTOTAL = 0.0
+
+# Clean up the database by deleting all items
+Item.objects.all().delete()
 
 # Button click event handler
 def on_button_click_add_item():
-    item_list = list(Item.objects.all())
-        
-    random_item = random.choice(item_list)
-    new_line = str(random_item)
+    global RUNNING_SUBTOTAL
+    upc = upc_entry.get().strip()
+    
+    if not upc:
+        text_area.insert(tk.END, "Please enter a UPC code.\n")
+        text_area.see(tk.END)
+        return
+    
+    try:
+        # Try to get the item by UPC code
+        item = Item.objects.get(upc_code=upc)
+        text_area.insert(tk.END, f"{item}\n")
+        text_area.see(tk.END)
 
-    text_area.insert(tk.END, new_line + "\n")
-    text_area.see(tk.END)
+        RUNNING_SUBTOTAL += item.get_price()
+        subtotal_text.set(f"${RUNNING_SUBTOTAL:.2f}")
 
-    global RUNNING_SUBTOTAL 
-    RUNNING_SUBTOTAL += random_item.get_price()
-    subtotal_text.set(f"${RUNNING_SUBTOTAL:.2f}")
+        # Clear the input box for the next item
+        upc_entry.delete(0, tk.END)
+
+    except Item.DoesNotExist:
+        text_area.insert(tk.END, f"Unknown product with UPC '{upc}'.\n")
+        text_area.see(tk.END)
+        upc_entry.delete(0, tk.END)
 
 # Function to load items from a file
 def load_items_into_database_from_file(filename):
@@ -79,6 +95,10 @@ def load_items_into_database_from_file(filename):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+    print('Available products:')
+    for i in Item.objects.all():
+        print(i.upc_code, i.name, i.price)
+
 ############################################################################
 ## START OF GUI APPLICATION
 ############################################################################
@@ -90,6 +110,24 @@ load_items_into_database_from_file('products_file.txt')
 root = tk.Tk()
 root.title("Cash Register App")
 root.geometry("500x500")
+
+# Create a frame for input and button
+input_frame = tk.Frame(root)
+input_frame.pack(pady=5)
+
+# UPC input entry
+upc_label = tk.Label(input_frame, text="Enter UPC Code:", font=("Times New Roman", 10))
+upc_label.grid(row=0, column=0, padx=(0, 5))
+
+upc_entry = tk.Entry(input_frame, font=("Times New Roman", 10))
+upc_entry.grid(row=0, column=1, padx=(0, 10))
+
+# Scan item button (uses the existing function)
+add_item_button = tk.Button(
+    input_frame, text="Scan Item",
+    command=lambda: on_button_click_add_item()
+)
+add_item_button.grid(row=0, column=2)
 
 # Create a scrolled text area for displaying items
 text_area = ScrolledText(
@@ -108,16 +146,5 @@ subtotal_text = tk.StringVar(value="$0.00")
 subtotal_count = tk.Label(button_frame, textvariable=subtotal_text, font=("Times New Roman", 10))
 subtotal_count.grid(row=0, column=1, padx=(0, 20))
 
-add_item_button = tk.Button(
-    button_frame, text="Scan Item", 
-    command=lambda: 
-    on_button_click_add_item()
-    )
-
-add_item_button.grid(row=0, column=2)
-
 # Start the GUI event loop
 root.mainloop()
-
-# Clean up the database by deleting all items
-Item.objects.all().delete()
