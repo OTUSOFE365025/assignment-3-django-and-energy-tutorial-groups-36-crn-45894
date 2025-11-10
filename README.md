@@ -4,7 +4,7 @@ Django ORM Standalone With Interactive Cash Register Application
 ![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
 ![Python](https://img.shields.io/badge/Python-yellow)
 
-This project uses the database components of Django without using the rest of Django (i.e. running a web server)! This project is built off of [Dan Caraon's Django-ORM](https://github.com/dancaron/Django-ORM) project. :tada: Our project takes advantage of Django ORM Standalone to implement a simple, randomized cash register. It does not use the request/response functionalty of a client/server web application that Django also provides, which means it is made to run locally. 
+This project uses the database components of Django without using the rest of Django (i.e. running a web server)! This project is built off of [Dan Caraon's Django-ORM](https://github.com/dancaron/Django-ORM) project. :tada: Our project takes advantage of Django ORM Standalone to implement a simple cash register. It does not use the request/response functionalty of a client/server web application that Django also provides, which means it is made to run locally. 
 
 :gear: Requirements
 -------------------
@@ -26,7 +26,7 @@ assignment-3-django-and-energy-tutorial-groups-36-crn-45894/
 ```
 
 __The [main.py](main.py) file is the entry point for the project, and where you can run this repositiory from. You automatically get access to the item model via ```from db.models import *```
-Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
+Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__
 
 __The [db/models.py](db/models.py) file is for configuring typical Django models.__ There is a item model used in creating the interactive, random cash register. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM.
 
@@ -72,6 +72,9 @@ Make sure your new environment is prepended by ```(venv)```:
 
 After going through Quick Setup:
 ![Running main.py after succesful setup](screendumps/runningmainpy.png)
+
+Scanning products via entering their UPC code and clicking the scan button
+![Entering UPC codes](screendumps/productscanner.png)
 
 :mortar_board: Django Models
 ----------------------------
