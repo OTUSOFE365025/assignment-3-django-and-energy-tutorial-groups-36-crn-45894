@@ -6,6 +6,15 @@ Django ORM Standalone With Interactive Cash Register Application
 
 This project uses the database components of Django without using the rest of Django (i.e. running a web server)! This project is built off of [Dan Caraon's Django-ORM](https://github.com/dancaron/Django-ORM) project. :tada: Our project takes advantage of Django ORM Standalone to implement a simple cash register. It does not use the request/response functionalty of a client/server web application that Django also provides, which means it is made to run locally. 
 
+:bust_in_silhouette: Group Members And Responsibilities 
+-------------------
+| Name           | ID        | Responsibility   | Email                           |
+|----------------|-----------|------------------|---------------------------------|
+| Blake Heselden | 100916163 | Q2               | blake.heselden@ontariotechu.net |
+| Steven Sun     | 100816207 | Q1               | yuxi.sun@ontariotechu.net       |
+| Evan Tome      | 100912667 | Q1               | evan.tome@ontariotechu.net      |
+
+
 :gear: Requirements
 -------------------
 - Last tested successfully with Python 3.11.9 and Django 5.2.8
