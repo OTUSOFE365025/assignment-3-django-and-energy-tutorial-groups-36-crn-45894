@@ -55,7 +55,7 @@ def on_button_click_add_item():
     global RUNNING_SUBTOTAL
     upc = upc_entry.get().strip()
     
-    if not upc or upc.isalpha():
+    if not upc or not upc.isnumeric():
         messagebox.showwarning("Input Error", "Please enter a UPC code.")
         text_area.see(tk.END)
         return
