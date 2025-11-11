@@ -1,0 +1,23 @@
+UPC Code Product Price
+12345 Coffee $2.32
+67890 Muffin $2.50
+73001 OrangeJuice $4.50
+81549 BreadLoaf $3.99
+92186 AAA-Batteries $12.49
+11475 PaperTowels $18.99
+26038 AppleCider $5.75
+39412 LaptopCharger $45.00
+45870 MilkBag $4.05
+50293 Bananas $0.78
+64917 DishSoap $3.15
+70550 ChickenBreast $15.30
+83214 T-Shirt $22.99
+99061 Flashlight $9.50
+10113 BoxOfCereal $4.25
+22846 BottledWater $5.99
+35579 DogFood $34.75
+47102 OliveOil $11.90
+51369 LightBulb $2.30
+68792 Toothpaste $3.89
+74605 HDMI-Cable $14.99
+88231 CarWax $19.99

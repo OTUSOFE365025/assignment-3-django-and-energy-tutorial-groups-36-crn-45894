@@ -1,101 +1,91 @@
-Django ORM Standalone
+Django ORM Standalone With Interactive Cash Register Application
 =====================
 
 ![Django](https://img.shields.io/badge/Django_ORM-Standalone-blue)
 ![Python](https://img.shields.io/badge/Python-yellow)
 
-Use the database components of Django without having to use the rest of Django (i.e. running a web server)! :tada: A typical use case for using this template would be if you are writing a python script and you would like the database functionality provided by Django, but have no need for the request/response functionalty of a client/server web application that Django also provides. 
+This project uses the database components of Django without using the rest of Django (i.e. running a web server)! This project is built off of [Dan Caraon's Django-ORM](https://github.com/dancaron/Django-ORM) project. :tada: Our project takes advantage of Django ORM Standalone to implement a simple cash register. It does not use the request/response functionalty of a client/server web application that Django also provides, which means it is made to run locally. 
 
-With this project template you can write regular python scripts and use Django's excellent ORM functionality with the database backend of your choice. This makes it convienient for Djangonauts to write database driven python applications with the familiar and well polished Django ORM. Enjoy.
+:bust_in_silhouette: Group Members And Responsibilities 
+-------------------
+| Name           | ID        | Responsibility   | Email                           |
+|----------------|-----------|------------------|---------------------------------|
+| Blake Heselden | 100916163 | Q2               | blake.heselden@ontariotechu.net |
+| Steven Sun     | 100816207 | Q1               | yuxi.sun@ontariotechu.net       |
+| Evan Tome      | 100912667 | Q1               | evan.tome@ontariotechu.net      |
+
 
 :gear: Requirements
 -------------------
-- Last tested successfully with Python 3.10.4 and Django 5.0.6
+- Last tested successfully with Python 3.11.9 and Django 5.2.8
 - Create venv and pip install django to import the required modules.
 
 :open_file_folder: File Structure
 ---------------------------------
 ```
-django-orm/
+assignment-3-django-and-energy-tutorial-groups-36-crn-45894/
 ├── db/
 │   ├── __init__.py
 │   └── models.py
 ├── main.py
 ├── manage.py
+├── products_file.txt
 ├── README.md
 └── settings.py
 ```
 
-__The main.py file is the entry point for the project, and where you start your code. You automatically get access to your models via ```from db.models import *```
-Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ :smiling_face_with_three_hearts:
+__The [main.py](main.py) file is the entry point for the project, and where you can run this repositiory from. You automatically get access to the item model via ```from db.models import *```
+Think of it like a plain old python file, but now with the addition of Django's feature-rich models.__ This file contains all of the items necessary to run the model cash register. In MVC terms, it includes the **Model:** Manages the application data, state, and business logic (e.g., product data, calculating the subtotal, database interaction). **View:** Renders the user interface (the Tkinter widgets) and captures user input. **Controller:** Acts as an intermediary, handling user actions from the View (e.g., button clicks) and updating the Model.
 
-__The db/models.py is where you configure your typical Django models.__ There is a toy user model included as a simple example. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM. 
+__The [db/models.py](db/models.py) file is for configuring typical Django models.__ There is a item model used in creating the interactive, random cash register. After running the migrations command in the quick setup below, a db.sqlite3 file will be generated. The settings.py file is where can swap out the sqlite3 database for another database connection, such as Postgres or AmazonRDS, if you wish. For most applications, sqlite3 will be powerful enough. But if you need to swap databases down the road, you can easily do so, which is one of the benefits of using the Django ORM.
 
-:rocket: Quick Setup
+__The [db/__init__.py](db/__init__.py) file is for marking the db directory as a package.__ This allows files like [db/models.py](db/models.py) to be loaded in other locations as a module inside the [db](db/) directory. You can also use it initalize any code that may need to be imported when used as a module for the first time. However, our ```__init__.py``` file is empty so it only fulfills the purpose of marking the directory as a package.
+
+__The [manage.py](manage.py) file is the standard entry point for running all Django management commands, and is needed in every Django project.__ It includes a shebang line, allowing the script to be executed as a command using a Unix-system. It also gives Django the location of the project's settings file, which is an essential file for loading and using Django. It also ensures that the settings file is executed before the any other code is run. 
+
+__The [settings.py](settings.py) file is central configuration file for any Django project. It contains all necessary variables and settings that tell Django how to function.__ You can find that we are using sqlite3 as our database engine, and the only Django application that will be active is ```db```. Quite a simple setup.
+
+__The [products_file.txt](products_file.txt) is the data file for all of the items that will be available to be scanned.__ Its contents will be read and stored into the database upon running main.py.
+
+:rocket: Quick Setup (Run These Line-by-Line)
 --------------------
-Create a folder for your project on your local machine
+Clone this repository into your local machine (Using Command Prompt). You can alternatively use your favorite IDE's Source Control features to clone this repository
 ```
-mkdir myproject; cd myproject
+git clone https://github.com/OTUSOFE365025/assignment-3-django-and-energy-tutorial-groups-36-crn-45894.git grp-36-assignment-3
+
+cd grp-36-assignment-3
 ```
-Create a virtual environment and install django
+Create a virtual environment (Windows Machine with Powershell) and install django
 ```
-python -m venv venv; source venv/bin/activate; pip install django
-```
-Download this project template from GitHub
-```
-git clone git@github.com:dancaron/Django-ORM.git; cd Django-ORM
+python -m venv venv
+
+venv\Scripts\Activate.ps1
+
+pip install django
 ```
 Initialize the database
 ```
-python manage.py makemigrations db; python manage.py migrate
+python manage.py makemigrations db
+
+python manage.py migrate
 ```
 Run the project
 ```
 python main.py
 ```
 
-Feel free to send pull requests if you want to improve this project.
-
-:crystal_ball: Example
+:crystal_ball: Example Screen Dumps
 ----------------------
-After running Quick Start above: 
+Make sure your new environment is prepended by ```(venv)```:
+![Check for (venv) to see if in virtual environment](screendumps/venvcheck.png)
 
-Code in db/models.py:
-```
-# Sample User model
-class User(models.Model):
-    name = models.CharField(max_length=50, default='Dan')
+After going through Quick Setup:
+![Running main.py after succesful setup](screendumps/runningmainpy.png)
 
-    def __str__(self):
-        return self.name
-```
-Code in main.py:
-```
-# Seed a few users in the database
-User.objects.create(name='Dan')
-User.objects.create(name='Robert')
-
-for u in User.objects.all():
-    print(f'ID: {u.id} \tUsername: {u.name}')
-```
-Output from command: ```python main.py```
-```
-ID: 1	Username: Dan
-ID: 2	Username: Robert
-```
+Scanning products via entering their UPC code and clicking the Scan Item button
+![Entering UPC codes](screendumps/productscanner.png)
 
 :mortar_board: Django Models
 ----------------------------
 
 Link: [How to Use Django Models](https://docs.djangoproject.com/en/3.1/topics/db/models/)
-
-License
--------
-
-The MIT License (MIT) Copyright (c) 2024 Dan Caron
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
