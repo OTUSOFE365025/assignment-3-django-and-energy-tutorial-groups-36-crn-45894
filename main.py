@@ -25,6 +25,8 @@ from db.models import *
 
 # Simple Tkinter Cash Register GUI Application
 import tkinter as tk
+import random
+from tkinter import messagebox
 from tkinter.scrolledtext import ScrolledText
 
 RUNNING_SUBTOTAL = 0.0
@@ -32,13 +34,29 @@ RUNNING_SUBTOTAL = 0.0
 # Clean up the database by deleting all items
 Item.objects.all().delete()
 
+def on_button_click_add_item_random():
+    global RUNNING_SUBTOTAL
+    # Get a random item from the database
+    items = list(Item.objects.all())
+    if not items:
+        messagebox.showwarning("No Items", "No items available in the database.")
+        text_area.see(tk.END)
+        return
+
+    item = random.choice(items)
+    text_area.insert(tk.END, f"{item}\n")
+    text_area.see(tk.END)
+
+    RUNNING_SUBTOTAL += item.get_price()
+    subtotal_text.set(f"${RUNNING_SUBTOTAL:.2f}")
+
 # Button click event handler
 def on_button_click_add_item():
     global RUNNING_SUBTOTAL
     upc = upc_entry.get().strip()
     
-    if not upc:
-        text_area.insert(tk.END, "Please enter a UPC code.\n")
+    if not upc or upc.isalpha():
+        messagebox.showwarning("Input Error", "Please enter a UPC code.")
         text_area.see(tk.END)
         return
     
@@ -55,7 +73,7 @@ def on_button_click_add_item():
         upc_entry.delete(0, tk.END)
 
     except Item.DoesNotExist:
-        text_area.insert(tk.END, f"Unknown product with UPC '{upc}'.\n")
+        messagebox.showwarning("Item Not Found", f"No item found with UPC '{upc}'.")
         text_area.see(tk.END)
         upc_entry.delete(0, tk.END)
 
@@ -122,16 +140,23 @@ upc_label.grid(row=0, column=0, padx=(0, 5))
 upc_entry = tk.Entry(input_frame, font=("Times New Roman", 10))
 upc_entry.grid(row=0, column=1, padx=(0, 10))
 
-# Scan item button (uses the existing function)
+# Add scan item button
 add_item_button = tk.Button(
     input_frame, text="Scan Item",
     command=lambda: on_button_click_add_item()
 )
 add_item_button.grid(row=0, column=2)
 
+# Add random item button
+add_random_item_button = tk.Button(
+    input_frame, text="Add Random Item",
+    command=lambda: on_button_click_add_item_random()
+)
+add_random_item_button.grid(row=0, column=3, padx=(10, 0))
+
 # Create a scrolled text area for displaying items
 text_area = ScrolledText(
-    root, wrap=tk.WORD, width=50, height=22, font=("Times New Roman", 10))
+    root, wrap=tk.WORD, width=54, height=22, font=("Times New Roman", 10))
 
 text_area.pack(padx=10, pady=10)
 

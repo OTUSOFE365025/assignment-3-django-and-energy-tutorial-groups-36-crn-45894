@@ -48,7 +48,7 @@ cd grp-36-assignment-3
 ```
 Create a virtual environment (Windows Machine with Powershell) and install django
 ```
-python -m venv venv 
+python -m venv venv
 
 venv\Scripts\Activate.ps1
 
